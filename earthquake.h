@@ -1,12 +1,12 @@
 /******************************************************************************
 -   earthquake.h
--   Prog Tools for Scits Engrs - CIVL 8903 Homework VII
+-   Prog Tools for Scits Engrs - CIVL 8903 Homework IX
 -
 -   File Discreption: class defination of earthquake
 -
--   Author: Yang Yang
+-   Implemented by: Yuan Zhou
 -
--   Github Repository: https://github.com/SwiftHickory/homework7.git
+-   Github Repository: https://github.com/SwiftHickory/homework8.git
 ******************************************************************************/
 
 #ifndef EARTHQUAKE_H
@@ -81,8 +81,10 @@ public:
     void setLogStream();
     string getLogStream();
 
+    void setIsValidHeader();
+    void getIsValidHeader();
+
 private:
-    stringstream logStream;
     string eventID;
     string date;
     string time;
@@ -100,6 +102,8 @@ private:
     double evdp;
     typeOfMagnitudeType magnitudeType;
     float magnitude;
+    stringstream logStream; // stringstream to store information needed to print to logFile
+    bool isValidHeader;
 
     void setHour(string new_hour);
     string getHour();

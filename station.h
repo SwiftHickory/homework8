@@ -1,18 +1,18 @@
 /******************************************************************************
 -   station.h
--   Prog Tools for Scits Engrs - CIVL 8903 Homework VII
+-   Prog Tools for Scits Engrs - CIVL 8903 Homework IX
 -
 -   File Discreption: class defination of station
 -
--   Author: Yang Yang
+-   Implemented by: Shepherd Kenworthy Tate
 -
--   Github Repository: https://github.com/SwiftHickory/homework7.git
+-   Github Repository: https://github.com/SwiftHickory/homework8.git
 ******************************************************************************/
 
 #ifndef STATION_H
 #define STATION_H
 
-#include "earthquake.h"
+#include "myFunction.h"
 
 // case sensitive
 enum networkCodeType {
@@ -39,31 +39,35 @@ enum typeOfInstrumentType {
 
 class Station {
 public:
-    bool setNetworkCode(string new_networkCode);
+    void setNetworkCode(string new_networkCode);
     string getNetworkCode();
 
-    bool setStationCode(string new_stationCode);
+    void setStationCode(string new_stationCode);
     string getStationCode();
 
-    bool setBandType(string new_bandType);
+    void setBandType(string new_bandType);
     string getBandType();
 
-    bool setInstrumentType(string new_instrumentType);
+    void setInstrumentType(string new_instrumentType);
     string getInstrumentType();
 
-    bool setOrientation(string new_orientation);
+    void setOrientation(string new_orientation);
     string getOrientation();
 
     void setLogStream();
     string getLogStream();
 
+    void setIsValidEntry();
+    void getIsValidEntry();
+
 private:
-    stringstream logStream;
     networkCodeType networkCode;
     string stationCode;
     typeOfBandType typeOfBand;
     typeOfInstrumentType typeOfInstrument;
     string orientation;  // one to three characters, case insensitive
+    stringstream logStream; // stringstream to store information needed to print to logFile
+    bool isValidEntry;
 };
 
 #endif

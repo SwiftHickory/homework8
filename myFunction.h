@@ -1,12 +1,12 @@
 /******************************************************************************
--   myFunction.h
--   Prog Tools for Scits Engrs - CIVL 8903 Homework VI
+-   earthquake.h
+-   Prog Tools for Scits Engrs - CIVL 8903 Homework IX
 -
--   File Discreption: functions used in this program
+-   File Discreption: functions used in this project
 -
--   Author: Yang Yang
+-   Implemented by all of us
 -
--   Github Repository: https://github.com/SwiftHickory/homework6.git
+-   Github Repository: https://github.com/SwiftHickory/homework8.git
 ******************************************************************************/
 
 #ifndef MYFUNCTION_H
@@ -18,6 +18,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <sstream>
+#include <list>
 
 using namespace std;
 

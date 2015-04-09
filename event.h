@@ -1,13 +1,28 @@
+/******************************************************************************
+-   earthquake.h
+-   Prog Tools for Scits Engrs - CIVL 8903 Homework IX
+-
+-   File Discreption: class defination of earthquake
+-
+-   Implemented by: Yang Yang
+-
+-   Github Repository: https://github.com/SwiftHickory/homework8.git
+******************************************************************************/
+
 #ifndef EVENT_H
 #define EVENT_H
 
 #include "station.h"
 #include "earthquake.h"
-#include <list>
+#include "myFunction.h"
 
 class Event{
 public:
-	Event(string inputFileName);
+	// constructor for Event.
+	Event();
+
+	// this function read input file named inputFileName and then process it
+	setInputFile(string inputFileName);
 
 	// read header can then produce output header
 	void headerProcessing();
