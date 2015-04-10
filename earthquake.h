@@ -40,50 +40,57 @@ enum months {
 
 class Earthquake{
 public:
-    void setEventID(string new_eventID);
+    // implement by Shepherd
+    bool setEventID(string new_eventID);
     string getEventID();
 
-    void setDate(string new_date);
+    // implement by Yang
+    bool setDate(string new_date);
     string getDate();
 
-    void setTime(string new_time);
+    // implement by Yang
+    bool setTime(string new_time);
     string getTime();
 
-    void setTimeZone(string new_timeZone);
+    // implement by Yang
+    bool setTimeZone(string new_timeZone);
     string getTimeZone();
 
-    void setEarthquakeName(string new_earthquakeName);
+    // implement by Shepherd
+    bool setEarthquakeName(string new_earthquakeName);
     string getEarthqaukeName();
 
-    void setMonth(string new_month);
+    // implement by Yang
+    bool setMonth(string new_month);
     string getMonth();
 
-    void setDay(string new_day);
+    // implement by Yang
+    bool setDay(string new_day);
     string getDay();
 
-    void setYear(string new_year);
+    // implement by Yang
+    bool setYear(string new_year);
     string getYear();
 
-    void setEvlo(double new_evlo);
+    // implement by Shepherd
+    bool setEvlo(double new_evlo);
     double getEvlo();
 
-    void setEvla(double new_evla);
+    // implement by Shepherd
+    bool setEvla(double new_evla);
     double getEvla();
 
-    void setEvdp(double new_evdp);
+    // implement by Shepherd
+    bool setEvdp(double new_evdp);
     double getEvdp();
 
-    void setMagnitudeType(string new_magnitudeType);
+    // implement by Yuan
+    bool setMagnitudeType(string new_magnitudeType);
     string getMagnitudeType();
 
-    void setMagnitude(float new_magnitude);
+    // implement by Yuan
+    bool setMagnitude(float new_magnitude);
     float getMagnitude();
-
-    void setLogStream();
-    string getLogStream();
-
-    void setIsValidHeader();
-    void getIsValidHeader();
 
 private:
     string eventID;
@@ -103,21 +110,24 @@ private:
     double evdp;
     typeOfMagnitudeType magnitudeType;
     float magnitude;
-    stringstream logStream; // stringstream to store information needed to print to logFile
-    bool isValidHeader;
 
-    void setHour(string new_hour);
+    // implement by Yuan
+    bool setHour(string new_hour);
     string getHour();
 
-    void setMinute(string new_minute);
+    // implement by Yuan
+    bool setMinute(string new_minute);
     string getMinute();
 
-    void setSecond(string new_second);
+    // implement by Yuan
+    bool setSecond(string new_second);
     string getSecond();
 
-    void setMillisecond(string new_millisecond);
+    // implement by Yuan
+    bool setMillisecond(string new_millisecond);
     string getMillisecond();
 
+    // implement by Yang
     // return the numer of days in a month
     int daysOfAMonth();
 };

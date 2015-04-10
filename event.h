@@ -2,7 +2,7 @@
 -   earthquake.h
 -   Prog Tools for Scits Engrs - CIVL 8903 Homework IX
 -
--   File Discreption: class defination of earthquake
+-   File Discreption: class defination of an event
 -
 -   Implemented by: Yang Yang
 -
@@ -18,27 +18,31 @@
 
 class Event{
 public:
+	// implement by Yang
 	// constructor for Event.
 	Event();
 
+	// implement by Yang
 	// this function read input file named inputFileName and then process it
-	setInputFile(string inputFileName);
+	void setInputFile(string inputFileName);
 
-	// read header can then produce output header
+	// implement by Shepherd
+	// read header
 	void headerProcessing();
 
-	// read table and then produce output
+	// implement by Yuan
+	// read valid entries into st
 	void tableProcessing();
 
-	// read and processing one entry
-	bool processOneEntry();
-
+	// implement by Yang
 	// print header
 	void printHeader();
 
+	// implement by Yang
 	// print signals
 	void printSignals();
 
+	// implement by Yang
 	~Event();
 
 private:
@@ -49,6 +53,7 @@ private:
 	ofstream outputFile;
 	int numberOfStations;
 	int numberOfValidStations;
+	bool isValidEvent;
 };
 
 #endif

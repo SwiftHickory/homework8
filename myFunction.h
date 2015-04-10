@@ -22,28 +22,33 @@
 
 using namespace std;
 
+// implement by Yang
 // function to open input file
 void openInput(ifstream &inputFile, string fileName);
 
+// implement by Yang
 // function to open output file
 void openOutput(ofstream &outputFile, string fileName);
 
+// implement by Shepherd
 // check whether a string contains only digits
 bool is_digits(string str);
 
+// implement by Shepherd
 // change all the letters in a string to lower case
 string lowerString(string str);
 
+// implement by Yuan
 // change all the letters in a string to upper case
 string upperString(string str);
 
+// implement by Yuan
 // convert a int to string
 string intToString(int num);
 
+// implement by Yang
 // print messeage to both terminal and a file
 void printOutput(ofstream &outputFile, const string &message, bool needExit = false);
 
-// deal with some left things to exit program safely
-void finishProgram();
 
 #endif

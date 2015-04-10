@@ -4,8 +4,6 @@
 -
 -   File Discreption: class defination of station
 -
--   Implemented by: Shepherd Kenworthy Tate
--
 -   Github Repository: https://github.com/SwiftHickory/homework8.git
 ******************************************************************************/
 
@@ -39,26 +37,26 @@ enum typeOfInstrumentType {
 
 class Station {
 public:
-    void setNetworkCode(string new_networkCode);
+    // implement by Yang
+    Station();
+
+    // implement by Shepherd
+    bool setNetworkCode(string new_networkCode);
     string getNetworkCode();
 
-    void setStationCode(string new_stationCode);
+    bool setStationCode(string new_stationCode);
     string getStationCode();
 
-    void setBandType(string new_bandType);
+    // implement by Yuan
+    bool setBandType(string new_bandType);
     string getBandType();
 
-    void setInstrumentType(string new_instrumentType);
+    bool setInstrumentType(string new_instrumentType);
     string getInstrumentType();
 
-    void setOrientation(string new_orientation);
+    // implement by Yang
+    bool setOrientation(string new_orientation);
     string getOrientation();
-
-    void setLogStream();
-    string getLogStream();
-
-    void setIsValidEntry();
-    void getIsValidEntry();
 
 private:
     networkCodeType networkCode;
@@ -66,8 +64,6 @@ private:
     typeOfBandType typeOfBand;
     typeOfInstrumentType typeOfInstrument;
     string orientation;  // one to three characters, case insensitive
-    stringstream logStream; // stringstream to store information needed to print to logFile
-    bool isValidEntry;
 };
 
 #endif
