@@ -8,6 +8,7 @@
 -
 -   Github Repository: https://github.com/SwiftHickory/homework8.git
 ******************************************************************************/
+// Try if I get the idea how to merge the files.
 
 #ifndef EARTHQUAKE_H
 #define EARTHQUAKE_H
