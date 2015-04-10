@@ -40,3 +40,18 @@ void printOutput(ofstream &outputFile, const string &message, bool needExit) {
     }
 
 }
+
+// change all the letters in a string to upper case
+string upperString(string str){ 
+    for (int i = 0; i < (int)str.size(); i++) {
+        str[i] = toupper(str[i]);
+    }
+    return str; 
+}
+
+// convert a int to string
+string intToString(int num){
+    stringstream s;
+    s << num;
+    return s.str();
+}
