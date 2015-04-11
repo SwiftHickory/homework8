@@ -10,23 +10,30 @@
 ******************************************************************************/
 
 #include "event.h"
+#include "global.h"
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
 
-	if (argc > 1) {
-		Event *eventDB = new Event[argc - 1];
-	} else {
-		cout << "Usage: " << argv[0] << " fileName1 fileName2 ..." << end;
-		cout << "Please give at least one input file" << endl;
-		return;
-	}
-	
-	for (int i = 0; i < argc - 1; i++) {
-		eventDB[i].setInputFile(argv[i]);
-	}
+    // open log file
+    openOutput(logFile, logFileName);
 
-	return;
+    if (argc > 1) {
+        Event *eventDB = new Event[argc - 1];
+    } else {
+        cout << "Usage: " << argv[0] << " fileName1 fileName2 ..." << end;
+        cout << "Please give at least one input file" << endl;
+        return;
+    }
+    
+    for (int i = 0; i < argc - 1; i++) {
+        eventDB[i].setInputFile(argv[i]);
+    }
+
+    // close logFile
+    logFile.close();
+
+    return 0;
 
 }

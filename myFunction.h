@@ -24,11 +24,11 @@ using namespace std;
 
 // implement by Yang
 // function to open input file
-void openInput(ifstream &inputFile, string fileName);
+bool openInput(ifstream &inputFile, string fileName);
 
 // implement by Yang
 // function to open output file
-void openOutput(ofstream &outputFile, string fileName);
+bool openOutput(ofstream &outputFile, string fileName);
 
 // implement by Shepherd
 // check whether a string contains only digits
@@ -50,5 +50,7 @@ string intToString(int num);
 // print messeage to both terminal and a file
 void printOutput(ofstream &outputFile, const string &message, bool needExit = false);
 
+// print cutline
+string cutLine();
 
 #endif

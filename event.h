@@ -18,42 +18,43 @@
 
 class Event{
 public:
-	// implement by Yang
-	// constructor for Event.
-	Event();
+    // implement by Yang
+    // constructor for Event.
+    Event();
 
-	// implement by Yang
-	// this function read input file named inputFileName and then process it
-	void setInputFile(string inputFileName);
+    // implement by Yang
+    // this function read input file named inputFileName and then process it
+    void setInputFile(string fileName);
 
-	// implement by Shepherd
-	// read header
-	void headerProcessing();
+    // implement by Shepherd
+    // read header
+    void headerProcessing();
 
-	// implement by Yuan
-	// read valid entries into st
-	void tableProcessing();
+    // implement by Yuan
+    // read valid entries into st
+    void tableProcessing();
 
-	// implement by Yang
-	// print header
-	void printHeader();
+    // implement by Yang
+    // print header
+    void printHeader();
 
-	// implement by Yang
-	// print signals
-	void printSignals();
+    // implement by Yang
+    // print signals
+    void printSignals();
 
-	// implement by Yang
-	~Event();
+    // implement by Yang
+    ~Event();
 
 private:
-	Earthquake eq;
-	list<Station> st;
-	ifstream inputFile;
-	ofstream logFile;
-	ofstream outputFile;
-	int numberOfStations;
-	int numberOfValidStations;
-	bool isValidEvent;
+    Earthquake eq;
+    list<Station> st;
+    ifstream inputFile;
+    string inputFileName;
+    ofstream outputFile;
+    string outputFileName;
+    int numberOfStations;
+    int numberOfValidStations;
+    bool isValidEvent;
 };
 
 #endif

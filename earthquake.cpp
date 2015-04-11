@@ -1,5 +1,4 @@
 #include "earthquake.h"
-#include "global.h"
 
 bool Earthquake::setDate(string new_date) {
 

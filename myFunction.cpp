@@ -1,19 +1,23 @@
 #include "myFunction.h"
+#include "global.h"
 
 // function to open input file
-void openInput(ifstream &inputFile, string fileName, ofstream &logFile) {
+bool openInput(ifstream &inputFile, string fileName, ofstream &logFile) {
 
     inputFile.open(fileName.c_str());
 
     // perform sanity check it
     if (!inputFile.is_open()) {
-        printOutput(logFile, "Cannot open input file: " + fileName + "\n", true);
+        printOutput(logFile, "Cannot open input file: " + fileName + "\n");
+        return false;
     }
+
+    return true;
 
 }
 
 // function to open output file
-void openOutput(ofstream &outputFile, string fileName) {
+bool openOutput(ofstream &outputFile, string fileName) {
 
     outputFile.open(fileName.c_str());
 
@@ -23,9 +27,13 @@ void openOutput(ofstream &outputFile, string fileName) {
             // if we can open error file, just print out to terminal
             cout << "Cannot open log file: " << logFileName << endl;
         } else {
-            printOutput(logFile, "Cannot open output file: " + fileName + "\n", true);
+            printOutput(logFile, "Cannot open output file: " + fileName + "\n");
         }
+
+        return false;
     }
+
+    return true;
 
 }
 
@@ -39,6 +47,20 @@ void printOutput(ofstream &outputFile, const string &message, bool needExit) {
         exit(EXIT_FAILURE);
     }
 
+}
+
+// print cutline
+string cutLine() {
+
+    stringstream cutlineStream;
+
+    for (int i = 0; i < 40; i++) {
+        cutlineStream << "-";
+    }
+
+    cutlineStream << endl;
+
+    return cutlineStream.str();
 }
 
 // change all the letters in a string to upper case
