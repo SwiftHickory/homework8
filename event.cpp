@@ -29,6 +29,18 @@ void Event::setInputFile(string fileName) {
 
 }
 
+// read valid entries into st
+void tableProcessing(){
+    int numOfValidEntry = 0;
+    int numOfReadEntry = 0;
+    int numOfSignal = 0;
+    string networkCode;
+    bool isValidEntry = true;
+    // Station entry[];    Using list here, since no maximum constrain.
+    while (inputfile >> networkCode){
+    }
+}
+
 // print header
 void printHeader() {
 

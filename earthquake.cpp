@@ -265,3 +265,60 @@ int Earthquake::daysOfAMonth() {
     }
 
 }
+
+bool Earthquake::setMagnitudeType(string new_magnitudeType){
+
+    // Case insensitive, convert the band type to uppercase
+    new_magnitudeType = upperString(new_magnitudeType);
+
+    if (new_magnitudeType == "ML"){
+        magnitudeType = ml;
+        return true;
+    }
+    if (new_magnitudeType == "MS"){
+        magnitudeType = ms;
+        return true;
+    }
+    if (new_magnitudeType == "MB"){
+        magnitudeType = mb;
+        return true;
+    }
+    if (new_magnitudeType == "MW"){
+        magnitudeType = mw;
+        return true;
+    }
+   
+    //printOutput(logFile,  "Error: invalid magnitude type of this earthquake!\n", true);
+    return false;
+}
+
+string Earthquake::getMagnitudeType(){
+    switch (magnitudeType){
+        case ml:
+            return "Ml";
+            break;
+        case ms:
+            return "Ms";
+            break;
+        case mb:
+            return "Mb";
+            break;
+        case mw:
+            return "Mw";
+            break;
+    }
+}
+
+
+bool Earthquake::setMagnitude(float new_magnitude){
+    if (new_magnitude <= 0){
+        //printOutput(logFile,"Error: Magnitude must be a positive number.\n", true);
+    }
+    else{
+        magnitude = new_magnitude;
+    }
+}
+
+float Earthquake::getMagnitude(){
+    return magnitude;
+}
