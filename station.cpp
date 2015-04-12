@@ -12,7 +12,7 @@ bool Station::setOrientation(string str) {
 
     if (str.length() < 4) {
         if (isdigit(str[0])) {
-            for (int i = 0; i < str.length(); i++) {
+            for (int i = 0; i < (int)str.length(); i++) {
                 if (str[i] != '1' && str[i] != '2' && str[i] != '3') {
                     return false;
                 }
@@ -22,7 +22,7 @@ bool Station::setOrientation(string str) {
 
             return true;
         } else if (islower(str[0])) {
-            for (int i = 0; i < str.length(); i++) {
+            for (int i = 0; i < (int)str.length(); i++) {
                 if (str[i] != 'n' && str[i] != 'e' && str[i] != 'z') {
                     return false;
                 }

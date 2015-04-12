@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     if (argc > 1) {
         Event *eventDB = new Event[argc - 1];
     } else {
-        cout << "Usage: " << argv[0] << " fileName1 fileName2 ..." << end;
+        cout << "Usage: " << argv[0] << " fileName1 fileName2 ..." << endl;
         cout << "Please give at least one input file" << endl;
         return;
     }
