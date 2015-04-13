@@ -36,6 +36,7 @@ void tableProcessing(){
     int numOfSignal = 0;
     string networkCode;
     bool isValidEntry = true;
+
     // Station entry[];    Using list here, since no maximum constrain.
     while (inputfile >> networkCode){
     }
@@ -50,6 +51,69 @@ void printHeader() {
     outputFile << eq.getEvlo() << ", " << eq.getEvla() << ", " << eq.getEvdp() << ")" << endl;
 
 }
+
+// Read and check entries, store the valid entries into list<station> st.
+void tableProcessing(){
+    int NumOfValidEntry = 0;
+    int NumOfReadEntry = 0;
+    int NumOfSignal = 0;
+    string networkcode;
+    bool isValidEntry = true;
+    Station temp_station;
+    //Since there is no constraint of the maximum valid entry number, using the "list" for storing the entries.
+    list<Station> st;   // Might be deleted later.
+
+    // Reading the file to the end 
+    while (inputFile != NULL){
+        inputFile >> networkcode;
+        NumOfReadEntry ++;
+        if (IsValidEntry(inputFile, temp_station, NumOfReadEntry, networkcode)){
+            // After checking the validation of one entry, push it back into the list signal.
+            st.push_back(temp_station);
+            string orientation = temp_station.getOrientation;
+            NumOfSignal += (int)orientation.length();
+            NumOfValidEntry ++;
+        }
+
+    }
+}
+
+// Read and check one entry if it is a valid entry.
+bool IsValidEntry (ifstream &inputFile, Station &entry, int entryNumber, string networkcode){
+    string  stname, typeofband, typeofinstru, orientation;
+    bool isValidEntry = true;
+
+    if(!entry.setNetworkCode(networkcode)){
+        printOutput(logFile,"Entry # " + intToString(entryNumber) + " ignored. Invalid network code.\n", false);
+        isValidEntry = false;
+    }
+
+    inputFile >> stname;
+    if(!entry.setStationCode(stname)){
+        printOutput(logFile, "Entry # " + intToString(entryNumber) + " ignored. Invalid station code.\n", false);
+        isValidEntry = false;
+    }
+
+    inputFile >> typeofband;
+    if(!entry.setBandType(typeofband)){
+        printOutput(logFile, "Entry # " + intToString(entryNumber) + " ignored. Invalid band type.\n", false);
+        isValidEntry = false;
+    }
+
+    inputFile >> typeofinstru;
+    if(!entry.setInstrumentType(typeofinstru)){
+        printOutput(logFile, "Entry # " + intToString(entryNumber) + " ignored. Invalid instrument type.\n", false);
+        isValidEntry = false;
+    }
+
+    inputFile >> orientation;
+    if(!entry.setOrientation(orientation)){
+        printOutput(logFile, "Entry # " + intToString(entryNumber) + " ignored. Invalid orientation.\n", false);
+        isValidEntry = false;
+    }
+
+    return isValidEntry;
+}  
 
 // print signals
 void printSignals() {
