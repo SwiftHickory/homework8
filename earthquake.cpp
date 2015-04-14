@@ -1,5 +1,18 @@
 #include "earthquake.h"
 
+bool Earthquake::setEventID(string new_eventID) {
+    
+    eventID = new_eventID;
+    return true;
+    
+}
+
+string Earthquake::getEventID() {
+    
+    return eventID;
+    
+}
+
 bool Earthquake::setDate(string new_date) {
 
     // the length of date must be 10
@@ -64,6 +77,34 @@ string Earthquake::getTime() {
 
     return time;
 
+}
+
+bool Earthquake::setEarthquakeName(ifstream &IF) {
+    
+    int checkpeek = 1, isfirst = 1;
+    string TempName, FinalName;
+    while(checkpeek == 1)
+    {
+        IF >> TempName;
+        if (isfirst == 1)
+        {
+            FinalName = TempName;
+            isfirst = 0;
+        } else
+        {
+            FinalName = FinalName + " " + TempName;
+        }
+        if(IF.peek() == '\n') checkpeek = 0;
+    }
+    earthquakeName = FinalName;
+    return true;
+    
+}
+
+string Earthquake::getEarthqaukeName() {
+    
+    return earthquakeName;
+    
 }
 
 bool Earthquake::setMonth(string new_month) {
@@ -264,6 +305,45 @@ int Earthquake::daysOfAMonth() {
             break;
     }
 
+}
+
+bool Earthquake::setEvlo(double new_evlo) {
+
+    evlo = new_evlo;
+    return true;
+    
+}
+
+double Earthquake::getEvlo() {
+    
+    return evlo;
+    
+}
+
+bool Earthquake::setEvla(double new_evla) {
+    
+    evla = new_evla;
+    return true;
+    
+}
+
+double Earthquake::getEvla() {
+    
+    return evla;
+    
+}
+
+bool Earthquake::setEvdp(double new_evdp) {
+    
+    evdp = new_evdp;
+    return true;
+    
+}
+
+double Earthquake::getEvdp() {
+    
+    return evdp;
+    
 }
 
 bool Earthquake::setMagnitudeType(string new_magnitudeType){

@@ -57,7 +57,7 @@ public:
     string getTimeZone();
 
     // implement by Shepherd
-    bool setEarthquakeName(string new_earthquakeName);
+    bool setEarthquakeName(ifstream &IF);
     string getEarthqaukeName();
 
     // implement by Yang
