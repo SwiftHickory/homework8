@@ -117,18 +117,17 @@ void tableProcessing(){
     int NumOfSignal = 0;
     string networkcode;
     bool isValidEntry = true;
-    Station temp_station;
+    Station *temp_station = new Station();
     //Since there is no constraint of the maximum valid entry number, using the "list" for storing the entries.
     list<Station> st;   // Might be deleted later.
 
     // Reading the file to the end 
-    while (inputFile != NULL){
-        inputFile >> networkcode;
+    while (inputFile >> networkcode){
         NumOfReadEntry ++;
         if (IsValidEntry(inputFile, temp_station, NumOfReadEntry, networkcode)){
             // After checking the validation of one entry, push it back into the list signal.
             st.push_back(temp_station);
-            string orientation = temp_station.getOrientation;
+            string orientation = *temp_station->getOrientation;
             NumOfSignal += (int)orientation.length();
             NumOfValidEntry ++;
         }
