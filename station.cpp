@@ -1,5 +1,4 @@
 #include "station.h"
-#include "global.h"
 
 Station::Station() {
     

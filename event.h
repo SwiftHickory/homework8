@@ -47,7 +47,7 @@ public:
 
 private:
     Earthquake eq;
-    list<Station> st;
+    list<Station *> st;
     ifstream inputFile;
     string inputFileName;
     ofstream outputFile;
