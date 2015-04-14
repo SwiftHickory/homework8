@@ -29,8 +29,79 @@ void Event::setInputFile(string fileName) {
 
 }
 
+void Event::headerProcessing () {
+    
+    string new_eventID, new_date, new_time, new_timeZone, new_magnitudeType;
+    string new_day, new_month, new_year;
+    double new_Long, new_Lat, new_Depth;
+    float new_magnitude;
+    
+    inputFile >> new_eventID;
+    eq.setEventID(new_eventID);
+    
+    inputFile >> new_date;
+    if(eq.setDate(new_date) == false) {
+        printOutput(outputFile, "Invalid Date", false);
+    }
+        
+    inputFile >> new_time;
+    if(eq.setTime(new_time) == false) {
+        printOutput(outputFile, "Invalid Time", false);
+    }
+    
+    inputFile >> new_timeZone;
+    if(eq.setTimeZone(new_timeZone) == false) {
+        printOutput(outputFile, "Invalid Time Zone", false);
+    }
+    
+    eq.setEarthquakeName(inputFile);
+    
+    if(eq.setMonth(new_month) == false) {
+        printOutput(outputFile, "Invalid Month", false);
+    }
+    
+    if(eq.setDay(new_day) == false) {
+        printOutput(outputFile, "Invalid Day", false);
+    }
+    
+    if(eq.setMonth(new_year) == false) {
+        printOutput(outputFile, "Invalid Year", false);
+    }
+    
+    inputFile >> new_Long;
+    eq.setEvlo(new_Long);
+    
+    inputFile >> new_Lat;
+    eq.setEvla(new_Lat);
+    
+    inputFile >> new_Depth;
+    eq.setEvdp(new_Depth);
+    
+    inputFile >> new_magnitudeType;
+    if(eq.setMagnitudeType(new_magnitudeType) == false) {
+        printOutput(outputFile, "Invalid Magnitude Type", false);
+    }
+    
+    inputFile >> new_magnitude;
+    if(eq.setMagnitude(new_magnitude) == false) {
+        printOutput(outputFile, "Negative Magnitude", false);
+    }
+
+}
+
+void printOutput(ofstream &outputFile, const string &message, bool needExit) {
+    
+    cout << message;
+    outputFile << message;
+    
+    if (needExit) {
+        exit(EXIT_FAILURE);
+    }
+    
+}
+
 // read valid entries into st
-void tableProcessing(){
+void tableProcessing() {
     int numOfValidEntry = 0;
     int numOfReadEntry = 0;
     int numOfSignal = 0;

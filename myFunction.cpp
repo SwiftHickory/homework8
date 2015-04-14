@@ -37,6 +37,35 @@ bool openOutput(ofstream &outputFile, string fileName) {
 
 }
 
+bool is_digits(string text) {
+    
+    int len = (int)text.length();
+    int j;
+    for (j = 0; j < len; j++) {
+        if (!isdigit(text[j])) {
+            return false;
+        }
+    }
+    
+    return true;
+    
+}
+
+string lowerString (string text) {
+    
+    int len = (int)text.length();
+    int j;
+    string getlow = "";
+    string ThreeSixNine;
+    for (j = 0; j < len; j++) {
+        ThreeSixNine = tolower(text[j]);
+        getlow = getlow + ThreeSixNine;
+    }
+    
+    return getlow;
+    
+}
+
 // print messeage to both terminal and a file
 void printOutput(ofstream &outputFile, const string &message, bool needExit) {
 
