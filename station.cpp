@@ -5,6 +5,54 @@ Station::Station() {
     
 }
 
+bool Station::setNetworkCode(string new_networkCode){
+    
+    // Case insensitive, convert the network code to uppercase.
+    new_networkCode = upperString(new_networkCode);
+    
+    if (new_networkCode ==  "CE") {
+        networkCode = CE;
+        return true;
+    }
+    if (new_networkCode ==  "CI") {
+        networkCode = CI;
+        return true;
+    }
+    if (new_networkCode ==  "FA") {
+        networkCode = FA;
+        return true;
+    }
+    if (new_networkCode ==  "NP") {
+        networkCode = NP;
+        return true;
+    }
+    if (new_networkCode ==  "WR") {
+        networkCode = WR;
+        return true;
+    }
+    return false;
+}
+
+string Station:: getNetworkCode() {
+    switch(networkCode){
+        case(CE):
+            return "CE";
+            break;
+        case(CI):
+            return "CI";
+            break;
+        case(FA):
+            return "FA";
+            break;
+        case(NP):
+            return "NP";
+            break;
+        case(WR):
+            return "WR";
+            break;
+    }
+}
+
 bool Station::setBandType(string new_bandType){
 
     // Case insensitive, convert the band type to uppercase. 
