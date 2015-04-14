@@ -130,9 +130,12 @@ void tableProcessing(){
             string orientation = *temp_station->getOrientation;
             NumOfSignal += (int)orientation.length();
             NumOfValidEntry ++;
-        }
-
+        } 
     }
+    printOutput(logFile, "Total invalid entries ignored: " + intToString(NumOfReadEntry-NumOfValidEntry) + "\n");
+    printOutput(logFile, "Total valid entries read: " + intToString(NumOfReadEntry) + "\n");
+    printOutput(logFile, "Total signal names produced: " + intToString(NumOfSignal) + "\n");
+
 }
 
 // Read and check one entry if it is a valid entry.
