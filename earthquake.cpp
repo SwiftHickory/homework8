@@ -307,6 +307,68 @@ int Earthquake::daysOfAMonth() {
 
 }
 
+bool Earthquake::setHour(string new_hour){
+    if (!is_digits(new_hour)){
+        return false;
+    }
+    else{
+        hour = atoi(new_hour.c_str()) ;
+        if (hour < 0 || hour >23 ){
+            return false;
+        }
+    }
+}
+
+string Earthquake::getHour(){
+    return intToString(hour); 
+}
+
+bool Earthquake::setMinute(string new_minute){
+    if (!is_digits(new_minute)){
+        return false;
+    }
+    else{
+        minute = atoi(new_minute.c_str());
+        if (minute < 0 || minute >59){
+            return false;
+        }
+    }
+}
+string Earthquake::getMinute(){ 
+    return intToString(minute);  
+}
+
+bool Earthquake::setSecond(string new_second){
+    if (!is_digits(new_second)){
+        return false;
+    }
+    else{
+        second = atoi(new_second.c_str());
+        if (second < 0 || second > 59){
+            return false;
+        }
+    }
+}
+string Earthquake::getSecond(){
+    return intToString(second);
+}
+
+bool Earthquake::setMillisecond(string new_millisecond){
+    if (!is_digits(new_millisecond)){
+        return false;
+    }
+    else{
+        millisecond = atoi(new_millisecond.c_str());
+        if (millisecond < 0 || millisecond >59){
+            return false;
+        }
+    }
+}
+string Earthquake::getMillisecond(){
+    return intToString(millisecond);
+}
+
+
 bool Earthquake::setEvlo(double new_evlo) {
 
     evlo = new_evlo;
@@ -345,6 +407,7 @@ double Earthquake::getEvdp() {
     return evdp;
     
 }
+
 
 bool Earthquake::setMagnitudeType(string new_magnitudeType){
 
