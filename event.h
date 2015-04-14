@@ -55,9 +55,11 @@ private:
     int numberOfStations;
     int numberOfValidStations;
     bool isValidEvent;
+    int NumOfValidEntry;
+    int NumOfReadEntry;
+    int NumOfSignal;
 };
 
-// Read and check one entry if it is a valid entry.(Yuan)
-bool IsValidEntry (ifstream &inputFile, Station &entry, int entryNumber, string networkCode);
+
 
 #endif
