@@ -12,23 +12,25 @@
 #include "event.h"
 #include "global.h"
 
-using namespace std;
-
 int main(int argc, char *argv[]) {
 
-    // open log file
-    openOutput(logFile, logFileName);
-
-    if (argc > 1) {
-        Event *eventDB = new Event[argc - 1];
-    } else {
+    if (argc == 1) {
         cout << "Usage: " << argv[0] << " fileName1 fileName2 ..." << endl;
         cout << "Please give at least one input file" << endl;
-        return;
+        return 0;
     }
+
+    // open log file
+    if (!openOutput(logFile, logFileName)) {
+        cout << "Log file open error! Exit program" << endl;
+        return 0;
+    }
+
+    // allocate memory for event db
+    Event *eventDB = new Event[argc - 1];
     
-    for (int i = 1; i < argc; i++) {
-        eventDB[i].setInputFile(argv[i]);
+    for (int i = 0; i < argc - 1; i++) {
+        eventDB[i].setInputFile(argv[i+1]);
     }
 
     // close logFile

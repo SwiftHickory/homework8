@@ -92,6 +92,7 @@ public:
     bool setMagnitude(float new_magnitude);
     float getMagnitude();
 
+
 private:
     string eventID;
     string date;

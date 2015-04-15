@@ -53,6 +53,8 @@ string Station:: getNetworkCode() {
             break;
     }
 
+    return "Wrong network code!";
+
 }
 
 bool Station::setStationCode(string new_stationCode) {
@@ -89,14 +91,17 @@ bool Station::setBandType(string new_bandType){
         typeOfBand = longperiod;
         return true;
     }
+
     if (new_bandType == "SHORT-PERIOD"){
         typeOfBand = shortperiod;
         return true;
     }
+
     if (new_bandType == "BROADBAND"){
         typeOfBand = broadband;
         return true;
     }
+
     return false;
 
 }
@@ -114,6 +119,8 @@ string Station::getBandType(){
             return "H";
             break;
     }
+
+    return "Wrong band type!";
 
 }
 
@@ -152,6 +159,8 @@ string Station::getInstrumentType(){
             return "N";
             break;
     }
+
+    return "Wrong instrument type!";
 
 }
 

@@ -6,12 +6,12 @@ CC = g++
 
 CFLAGS = -Wall
 
-all: main
+all: yang
 
-yang: mian.o myFunction.o earthquake.o station.o global.o event.o
-	${CC} -o main main.o myFunction.o earthquake.o station.o global.o event.o
+yang: main.o myFunction.o earthquake.o station.o global.o event.o
+	${CC} -o yang main.o myFunction.o earthquake.o station.o global.o event.o
 
-yang.o: main.cpp
+main.o: main.cpp
 	${CC} -c ${CFLAGS} main.cpp
 
 myFunction.o: myFunction.cpp

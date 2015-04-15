@@ -214,6 +214,8 @@ string Earthquake::getMonth() {
             break;
     }
 
+    return "Wrong month";
+
 }
 
 bool Earthquake::setDay(string new_day) {
@@ -305,6 +307,8 @@ int Earthquake::daysOfAMonth() {
             break;
     }
 
+    return 0;
+
 }
 
 bool Earthquake::setEvlo(double new_evlo) {
@@ -390,7 +394,6 @@ string Earthquake::getMagnitudeType(){
 
 }
 
-
 bool Earthquake::setMagnitude(float new_magnitude){
 
     if (new_magnitude <= 0){
@@ -407,4 +410,110 @@ float Earthquake::getMagnitude(){
 
     return magnitude;
     
+}
+
+bool Earthquake::setHour(string new_hour){
+
+    if (!is_digits(new_hour)){
+        return false;
+    }
+    else{
+        hour = atoi(new_hour.c_str());
+        if (hour < 0 || hour >23 ){
+            return false;
+        }
+    }
+
+    return true;
+
+}
+
+string Earthquake::getHour(){
+
+    return intToString(hour);
+
+}
+
+bool Earthquake::setMinute(string new_minute){
+
+    if (!is_digits(new_minute)){
+        return false;
+    }
+    else{
+        minute = atoi(new_minute.c_str());
+        if (minute < 0 || minute >59){
+            return false;
+        }
+    }
+
+    return true;
+
+}
+
+string Earthquake::getMinute(){
+
+    return intToString(minute);
+
+}
+
+bool Earthquake::setSecond(string new_second){
+
+    if (!is_digits(new_second)){
+        return false;
+    }
+    else{
+        second = atoi(new_second.c_str());
+        if (second < 0 || second > 59){
+            return false;
+        }
+    }
+
+    return true;
+
+}
+
+string Earthquake::getSecond(){
+
+    return intToString(second);
+
+}
+
+bool Earthquake::setMillisecond(string new_millisecond){
+
+    if (!is_digits(new_millisecond)){
+        return false;
+    }
+    else{
+        millisecond = atoi(new_millisecond.c_str());
+        if (millisecond < 0 || millisecond >59){
+            return false;
+        }
+    }
+
+    return true;
+
+}
+
+string Earthquake::getMillisecond(){
+
+    return intToString(millisecond);
+
+}
+
+bool Earthquake::setTimeZone(string new_timeZone) {
+
+    // time zone must be three characters
+    if (new_timeZone.length() != 3) {
+        return false;
+    } else {
+        timeZone = new_timeZone;
+        return true;
+    }
+
+}
+
+string Earthquake::getTimeZone() {
+
+    return timeZone;
+
 }

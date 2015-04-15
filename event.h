@@ -58,7 +58,4 @@ private:
     bool isValidEvent;
 };
 
-// Read and check one entry if it is a valid entry.(Yuan)
-bool IsValidEntry (ifstream &inputFile, Station &entry, int entryNumber, string networkCode);
-
 #endif

@@ -2,7 +2,7 @@
 #include "global.h"
 
 // function to open input file
-bool openInput(ifstream &inputFile, string fileName, ofstream &logFile) {
+bool openInput(ifstream &inputFile, string fileName) {
 
     inputFile.open(fileName.c_str());
 
@@ -84,7 +84,7 @@ string cutLine() {
     stringstream cutlineStream;
 
     for (int i = 0; i < 40; i++) {
-        cutlineStream << "-";
+        cutlineStream << "=";
     }
 
     cutlineStream << endl;

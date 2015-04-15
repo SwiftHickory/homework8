@@ -1,4 +1,4 @@
-#include "Event.h"
+#include "event.h"
 #include "global.h"
 
 Event::Event() {
@@ -16,19 +16,21 @@ void Event::setInputFile(string fileName) {
     inputFileName = fileName + ".in";
     outputFileName = fileName + ".out";
 
-    if (openInputFile(inputFile, inputFileName)) {
+    if (openInput(inputFile, inputFileName)) {
         printOutput(logFile, "Processing input file: " + inputFileName + "\n");
 
-        openOutput(outputFile, outputFileName);
         headerProcessing();
         if (isValidEvent) {
+            openOutput(outputFile, outputFileName);
             tableProcessing();
+            printHeader();
+            printSignals();
         }
-
-        printOutput(logFile, "Finished " + inputFileName + "\n");
-        printOutput(logFile, cutLine());
-        printOutput(logFile, "\n");
     }
+
+    printOutput(logFile, "Finished " + inputFileName + "\n\n");
+    printOutput(logFile, cutLine());
+    printOutput(logFile, "\n");
 
 }
 
@@ -43,21 +45,21 @@ void Event::headerProcessing () {
     
     inputFile >> new_date;
     if(eq.setDate(new_date) == false) {
-        printOutput(logFile, "Invalid Date");
+        printOutput(logFile, "Error: invalid date of this earthquake!\n");
         isValidEvent = false;
         return;
     }
         
     inputFile >> new_time;
     if(eq.setTime(new_time) == false) {
-        printOutput(logFile, "Invalid Time");
+        printOutput(logFile, "Error: invalid time of this earthquake!\n");
         isValidEvent = false;
         return;
     }
     
     inputFile >> new_timeZone;
     if(eq.setTimeZone(new_timeZone) == false) {
-        printOutput(logFile, "Invalid Time Zone");
+        printOutput(logFile, "Error: invalid time zone of this earthquake!\n");
         isValidEvent = false;
         return;
     }
@@ -75,14 +77,14 @@ void Event::headerProcessing () {
     
     inputFile >> new_magnitudeType;
     if(eq.setMagnitudeType(new_magnitudeType) == false) {
-        printOutput(outputFile, "Invalid Magnitude Type");
+        printOutput(logFile, "Error: invalid magnitude type of this earthquake!\n");
         isValidEvent = false;
         return;
     }
     
     inputFile >> new_magnitude;
     if(eq.setMagnitude(new_magnitude) == false) {
-        printOutput(outputFile, "Negative Magnitude");
+        printOutput(logFile, "Error: invalid magnitude of this earthquake!\n");
         isValidEvent = false;
         return;
     }
@@ -90,7 +92,7 @@ void Event::headerProcessing () {
 }
 
 // print header
-void printHeader() {
+void Event::printHeader() {
 
     outputFile << "# " << eq.getDay() << " " << eq.getMonth() << " " << eq.getYear() << " ";
     outputFile << eq.getTime() << " " << eq.getTimeZone() << " " << eq.getMagnitudeType() << " " << eq.getMagnitude() << " ";
@@ -100,7 +102,7 @@ void printHeader() {
 }
 
 // Read and check entries, store the valid entries into list<station> st.
-void event::tableProcessing(){
+void Event::tableProcessing(){
 
     string networkcode;
     bool isValidEntry = true;
@@ -109,47 +111,47 @@ void event::tableProcessing(){
     // Reading the file to the end 
     while (inputFile >> networkcode){
         numberOfStations++;
-        string  stname, typeofband, typeofinstru, orientation;
-        bool isValidEntry = true;
+        string  stname,typeofband,typeofinstru,orientation;
+        isValidEntry = true;
 
         // Read and check one entry if it is a valid entry.
-        if(!((*temp_station)->setNetworkCode(networkcode))) {
-            printOutput(logFile,"Entry # " + intToString(NumOfReadEntry) + " ignored. Invalid network code.\n");
+        if(!(temp_station->setNetworkCode(networkcode))) {
+            printOutput(logFile,"Entry # " + intToString(numberOfStations) + " ignored. Invalid network code.\n");
             isValidEntry = false;
         }
 
         inputFile >> stname;
-        if(!((*temp_station)->setStationCode(stname)) {
-            printOutput(logFile, "Entry # " + intToString(NumOfReadEntry) + " ignored. Invalid station code.\n");
+        if(!(temp_station->setStationCode(stname))) {
+            printOutput(logFile, "Entry # " + intToString(numberOfStations) + " ignored. Invalid station code.\n");
             isValidEntry = false;
         }
 
         inputFile >> typeofband;
-        if(!((*temp_station)->setBandType(typeofband))) {
-            printOutput(logFile, "Entry # " + intToString(NumOfReadEntry) + " ignored. Invalid band type.\n");
+        if(!(temp_station->setBandType(typeofband))) {
+            printOutput(logFile, "Entry # " + intToString(numberOfStations) + " ignored. Invalid band type.\n");
             isValidEntry = false;
         }
 
         inputFile >> typeofinstru;
-        if(!((*temp_station)->setInstrumentType(typeofinstru))){
-            printOutput(logFile, "Entry # " + intToString(NumOfReadEntry) + " ignored. Invalid instrument type.\n");
+        if(!(temp_station->setInstrumentType(typeofinstru))) {
+            printOutput(logFile, "Entry # " + intToString(numberOfStations) + " ignored. Invalid instrument type.\n");
             isValidEntry = false;
         }
 
         inputFile >> orientation;
-        if(!((*temp_station)->setOrientation(orientation)){
-            printOutput(logFile, "Entry # " + intToString(NumOfReadEntry) + " ignored. Invalid orientation.\n");
+        if(!(temp_station->setOrientation(orientation))) {
+            printOutput(logFile, "Entry # " + intToString(numberOfStations) + " ignored. Invalid orientation.\n");
             isValidEntry = false;
         }
 
-        if (isValidEntry == true){
+        if (isValidEntry == true) {
             // After checking the validation of one entry, push it back into the list signal.
             st.push_back(temp_station);
-            string orientation = (*temp_station)->getOrientation;
+            string orientation = temp_station->getOrientation();
             numberOfSignals += orientation.length();
             numberOfValidStations++;
         } 
-     }
+    }
 
     printOutput(logFile, "Total invalid entries ignored: " + intToString(numberOfStations - numberOfValidStations) + "\n");
     printOutput(logFile, "Total valid entries read: " + intToString(numberOfValidStations) + "\n");
@@ -158,22 +160,19 @@ void event::tableProcessing(){
 }
 
 // print signals
-void printSignals() {
+void Event::printSignals() {
 
     // print all the signals to output file
     for (list<Station *>::iterator it = st.begin(); it != st.end(); it++) {
         string orientation = (*it)->getOrientation();
 
-        for (int j = 0; j < orientation.length(); j++) {
-            stringstream singalStream;
-            singalStream << eq.getEventID() << ".";
-            singalStream << (*it)->getNetworkCode() << ".";
-            singalStream << (*it)->getStationCode() << ".";
-            singalStream << (*it)->getBandType();
-            singalStream << (*it)->getInstrumentType();
-            singalStream << orientation[j] << endl;
-
-            outputFile << singalStream.str();
+        for (int j = 0; j < (int)orientation.length(); j++) {
+            outputFile << eq.getEventID() << ".";
+            outputFile << (*it)->getNetworkCode() << ".";
+            outputFile << (*it)->getStationCode() << ".";
+            outputFile << (*it)->getBandType();
+            outputFile << (*it)->getInstrumentType();
+            outputFile << orientation[j] << endl;
         }
     }
 
@@ -182,7 +181,7 @@ void printSignals() {
 Event::~Event() {
 
     if (inputFile.is_open()) {
-        inputFile.close()
+        inputFile.close();
     }
 
     if (outputFile.is_open()) {
