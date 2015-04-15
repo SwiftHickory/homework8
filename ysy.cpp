@@ -33,6 +33,8 @@ int main(int argc, char *argv[]) {
         eventDB[i].setInputFile(argv[i+1]);
     }
 
+    printOutput(logFile, "Finish all!\n");
+
     // close logFile
     logFile.close();
 

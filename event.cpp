@@ -188,4 +188,9 @@ Event::~Event() {
         outputFile.close();
     }
 
+    // delete the allocate memory
+    for (list<Station *>::iterator it = st.begin(); it != st.end(); it++) {
+        delete *it;
+    }
+
 }
