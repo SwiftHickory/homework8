@@ -52,6 +52,54 @@ string Station:: getNetworkCode() {
     }
 }
 
+bool Station::setStationCode(string new_stationCode) {
+    
+    if(new_stationCode.length() != 3 && new_stationCode.length() != 5)
+    {
+        return false;
+    } else
+    {
+        if (new_stationCode.length() == 5)   
+        {
+            for (int check = 0; check <= 4; check++)
+            {
+                if(!isdigit(new_stationCode[check]))
+                {
+                    return false;
+                }
+            }
+        } else         
+        {
+            for (int check = 0; check <= 2; check++)
+            {
+                if(!isalpha(new_stationCode[check]))
+                {
+                    return false;
+                }
+                
+                string temp = new_stationCode;
+                string temp1 = temp;
+                upperString(temp);
+                
+                if (temp != temp1)
+                {
+                    return false;
+                }
+            }
+        }
+    }
+
+    stationCode = new_stationCode;
+    return true;
+
+}
+
+string Station::getStationCode() {
+    
+    return stationCode;
+    
+}
+
 bool Station::setBandType(string new_bandType){
 
     // Case insensitive, convert the band type to uppercase. 
