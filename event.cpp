@@ -32,7 +32,6 @@ void Event::setInputFile(string fileName) {
 void Event::headerProcessing () {
     
     string new_eventID, new_date, new_time, new_timeZone, new_magnitudeType;
-    string new_day, new_month, new_year;
     double new_Long, new_Lat, new_Depth;
     float new_magnitude;
     
@@ -41,32 +40,20 @@ void Event::headerProcessing () {
     
     inputFile >> new_date;
     if(eq.setDate(new_date) == false) {
-        printOutput(outputFile, "Invalid Date", false);
+        printOutput(logFile, "Invalid Date");
     }
         
     inputFile >> new_time;
     if(eq.setTime(new_time) == false) {
-        printOutput(outputFile, "Invalid Time", false);
+        printOutput(logFile, "Invalid Time");
     }
     
     inputFile >> new_timeZone;
     if(eq.setTimeZone(new_timeZone) == false) {
-        printOutput(outputFile, "Invalid Time Zone", false);
+        printOutput(logFile, "Invalid Time Zone");
     }
     
     eq.setEarthquakeName(inputFile);
-    
-    if(eq.setMonth(new_month) == false) {
-        printOutput(outputFile, "Invalid Month", false);
-    }
-    
-    if(eq.setDay(new_day) == false) {
-        printOutput(outputFile, "Invalid Day", false);
-    }
-    
-    if(eq.setMonth(new_year) == false) {
-        printOutput(outputFile, "Invalid Year", false);
-    }
     
     inputFile >> new_Long;
     eq.setEvlo(new_Long);
@@ -111,10 +98,10 @@ void printHeader() {
 }
 
 // Read and check entries, store the valid entries into list<station> st.
-void event::tableProcessing(){
-    NumOfValidEntry = 0;
-    NumOfReadEntry = 0;
-    NumOfSignal = 0;
+void tableProcessing(){
+    int NumOfValidEntry = 0;
+    int NumOfReadEntry = 0;
+    int NumOfSignal = 0;
     string networkcode;
     bool isValidEntry = true;
     Station *temp_station = new Station();
@@ -123,41 +110,8 @@ void event::tableProcessing(){
 
     // Reading the file to the end 
     while (inputFile >> networkcode){
-        NumOfReadEntry ++;  
-        string  stname, typeofband, typeofinstru, orientation;
-        bool isValidEntry = true;
-
-        // Read and check one entry if it is a valid entry.
-
-        if(!(temp_station->setNetworkCode(networkcode))){
-            printOutput(logFile,"Entry # " + intToString(NumOfReadEntry) + " ignored. Invalid network code.\n", false);
-            isValidEntry = false;
-        }
-
-        inputFile >> stname;
-        if(!temp_station->setStationCode(stname)){
-            printOutput(logFile, "Entry # " + intToString(NumOfReadEntry) + " ignored. Invalid station code.\n", false);
-            isValidEntry = false;
-        }
-
-        inputFile >> typeofband;
-        if(!temp_station->setBandType(typeofband)){
-            printOutput(logFile, "Entry # " + intToString(NumOfReadEntry) + " ignored. Invalid band type.\n", false);
-            isValidEntry = false;
-        }
-
-        inputFile >> typeofinstru;
-        if(!temp_station->setInstrumentType(typeofinstru)){
-            printOutput(logFile, "Entry # " + intToString(NumOfReadEntry) + " ignored. Invalid instrument type.\n", false);
-            isValidEntry = false;
-        }
-
-        inputFile >> orientation;
-        if(!temp_station->setOrientation(orientation)){
-            printOutput(logFile, "Entry # " + intToString(NumOfReadEntry) + " ignored. Invalid orientation.\n", false);
-            isValidEntry = false;
-        }
-        if (isValidEntry == true){
+        NumOfReadEntry ++;
+        if (IsValidEntry(inputFile, temp_station, NumOfReadEntry, networkcode)){
             // After checking the validation of one entry, push it back into the list signal.
             st.push_back(temp_station);
             string orientation = *temp_station->getOrientation;
@@ -165,12 +119,48 @@ void event::tableProcessing(){
             NumOfValidEntry ++;
         } 
     }
-        
     printOutput(logFile, "Total invalid entries ignored: " + intToString(NumOfReadEntry-NumOfValidEntry) + "\n");
     printOutput(logFile, "Total valid entries read: " + intToString(NumOfReadEntry) + "\n");
     printOutput(logFile, "Total signal names produced: " + intToString(NumOfSignal) + "\n");
 
 }
+
+// Read and check one entry if it is a valid entry.
+bool IsValidEntry (ifstream &inputFile, Station &entry, int entryNumber, string networkcode){
+    string  stname, typeofband, typeofinstru, orientation;
+    bool isValidEntry = true;
+
+    if(!entry.setNetworkCode(networkcode)){
+        printOutput(logFile,"Entry # " + intToString(entryNumber) + " ignored. Invalid network code.\n", false);
+        isValidEntry = false;
+    }
+
+    inputFile >> stname;
+    if(!entry.setStationCode(stname)){
+        printOutput(logFile, "Entry # " + intToString(entryNumber) + " ignored. Invalid station code.\n", false);
+        isValidEntry = false;
+    }
+
+    inputFile >> typeofband;
+    if(!entry.setBandType(typeofband)){
+        printOutput(logFile, "Entry # " + intToString(entryNumber) + " ignored. Invalid band type.\n", false);
+        isValidEntry = false;
+    }
+
+    inputFile >> typeofinstru;
+    if(!entry.setInstrumentType(typeofinstru)){
+        printOutput(logFile, "Entry # " + intToString(entryNumber) + " ignored. Invalid instrument type.\n", false);
+        isValidEntry = false;
+    }
+
+    inputFile >> orientation;
+    if(!entry.setOrientation(orientation)){
+        printOutput(logFile, "Entry # " + intToString(entryNumber) + " ignored. Invalid orientation.\n", false);
+        isValidEntry = false;
+    }
+
+    return isValidEntry;
+}  
 
 // print signals
 void printSignals() {
