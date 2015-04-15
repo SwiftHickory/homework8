@@ -29,10 +29,12 @@ bool Station::setNetworkCode(string new_networkCode){
         networkCode = WR;
         return true;
     }
+
     return false;
 }
 
 string Station:: getNetworkCode() {
+
     switch(networkCode){
         case(CE):
             return "CE";
@@ -50,47 +52,25 @@ string Station:: getNetworkCode() {
             return "WR";
             break;
     }
+
 }
 
 bool Station::setStationCode(string new_stationCode) {
     
-    if(new_stationCode.length() != 3 && new_stationCode.length() != 5)
-    {
-        return false;
-    } else
-    {
-        if (new_stationCode.length() == 5)   
-        {
-            for (int check = 0; check <= 4; check++)
-            {
-                if(!isdigit(new_stationCode[check]))
-                {
-                    return false;
-                }
-            }
-        } else         
-        {
-            for (int check = 0; check <= 2; check++)
-            {
-                if(!isalpha(new_stationCode[check]))
-                {
-                    return false;
-                }
-                
-                string temp = new_stationCode;
-                string temp1 = temp;
-                upperString(temp);
-                
-                if (temp != temp1)
-                {
-                    return false;
-                }
-            }
+    // station code must be 3 captital letters or 5 numeric characters
+    if (new_stationCode.length() == 5 && is_digits(new_stationCode)) {
+        stationCode = new_stationCode;
+        return true;
+    }
+
+    if (new_stationCode.length() == 3) {
+        if (isupper(new_stationCode[0]) && isupper(new_stationCode[1]) && isupper(new_stationCode[2])) {
+            stationCode = new_stationCode;
+            return true;
         }
     }
 
-    stationCode = new_stationCode;
-    return true;
+    return false;
 
 }
 
@@ -118,9 +98,11 @@ bool Station::setBandType(string new_bandType){
         return true;
     }
     return false;
+
 }
 
 string Station::getBandType(){
+
     switch (typeOfBand){
         case (longperiod): 
             return "L";
@@ -132,6 +114,7 @@ string Station::getBandType(){
             return "H";
             break;
     }
+
 }
 
 bool Station::setInstrumentType(string new_instrumentType){
@@ -151,10 +134,13 @@ bool Station::setInstrumentType(string new_instrumentType){
         typeOfInstrument = accelerometer;
         return true;
     }
+
     return false;
+
 }
 
 string Station::getInstrumentType(){
+    
     switch(typeOfInstrument){
         case highgain:
             return "H";
@@ -167,7 +153,9 @@ string Station::getInstrumentType(){
             break;
     }
 
-}bool Station::setOrientation(string str) {
+}
+
+bool Station::setOrientation(string str) {
 
     // case insensitive so convert it to lower case first
     str = lowerString(str);

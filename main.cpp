@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
         return;
     }
     
-    for (int i = 0; i < argc - 1; i++) {
+    for (int i = 1; i < argc; i++) {
         eventDB[i].setInputFile(argv[i]);
     }
 

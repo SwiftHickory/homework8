@@ -368,11 +368,11 @@ bool Earthquake::setMagnitudeType(string new_magnitudeType){
         return true;
     }
    
-    //printOutput(logFile,  "Error: invalid magnitude type of this earthquake!\n", true);
     return false;
 }
 
 string Earthquake::getMagnitudeType(){
+
     switch (magnitudeType){
         case ml:
             return "Ml";
@@ -387,18 +387,24 @@ string Earthquake::getMagnitudeType(){
             return "Mw";
             break;
     }
+
 }
 
 
 bool Earthquake::setMagnitude(float new_magnitude){
+
     if (new_magnitude <= 0){
-        //printOutput(logFile,"Error: Magnitude must be a positive number.\n", true);
+        return false;
     }
     else{
         magnitude = new_magnitude;
+        return true;
     }
+
 }
 
 float Earthquake::getMagnitude(){
+
     return magnitude;
+    
 }

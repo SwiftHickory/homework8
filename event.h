@@ -54,6 +54,7 @@ private:
     string outputFileName;
     int numberOfStations;
     int numberOfValidStations;
+    int numberOfSignals;
     bool isValidEvent;
 };
 
