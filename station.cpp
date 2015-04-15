@@ -6,9 +6,6 @@ Station::Station() {
 
 bool Station::setNetworkCode(string new_networkCode){
     
-    // Case insensitive, convert the network code to uppercase.
-    new_networkCode = upperString(new_networkCode);
-    
     if (new_networkCode ==  "CE") {
         networkCode = CE;
         return true;

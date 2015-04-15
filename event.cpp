@@ -106,13 +106,13 @@ void Event::tableProcessing(){
 
     string networkcode;
     bool isValidEntry = true;
-    Station *temp_station = new Station;
  
     // Reading the file to the end 
     while (inputFile >> networkcode){
         numberOfStations++;
         string  stname,typeofband,typeofinstru,orientation;
         isValidEntry = true;
+        Station *temp_station = new Station;
 
         // Read and check one entry if it is a valid entry.
         if(!(temp_station->setNetworkCode(networkcode))) {
@@ -147,15 +147,15 @@ void Event::tableProcessing(){
         if (isValidEntry == true) {
             // After checking the validation of one entry, push it back into the list signal.
             st.push_back(temp_station);
-            string orientation = temp_station->getOrientation();
-            numberOfSignals += orientation.length();
+            string tmp_orientation = temp_station->getOrientation();
+            numberOfSignals += tmp_orientation.length();
             numberOfValidStations++;
         } 
     }
 
     printOutput(logFile, "Total invalid entries ignored: " + intToString(numberOfStations - numberOfValidStations) + "\n");
     printOutput(logFile, "Total valid entries read: " + intToString(numberOfValidStations) + "\n");
-    printOutput(logFile, "Total signal names produced: " + intToString(numberOfStations) + "\n");
+    printOutput(logFile, "Total signal names produced: " + intToString(numberOfSignals) + "\n");
  
 }
 
