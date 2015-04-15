@@ -1,4 +1,4 @@
 #include "global.h"
 
-string logFileName = "yang.log";
+string logFileName = "ysy.log";
 ofstream logFile;
